@@ -1,0 +1,50 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 280px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.avatar {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    /* border: 5px solid red; */
+    
+}
+.avatar > img{
+  width:100px;
+  height:auto;
+}
+
+.icon-margen{
+  margin-right: 20px;
+}
+
+.item{
+  border-radius: 0px 20px 20px 0px;
+}
+
+.avatar-content{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+
+}

@@ -1,0 +1,29 @@
+<mat-toolbar style="background-color: white;">
+    <mat-icon style="margin-left: 50px;">assignment_ind</mat-icon>
+    <span id="titulo">Roles para Usuarios</span>
+    <div class="example-spacer"></div>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<div class="contenedor mat-elevation-z4">
+    <div class="title">
+        <mat-icon>assignment_ind</mat-icon> <h3> Cambiar Rol</h3>
+    </div>
+    <mat-grid-list cols="1" rowHeight="140px">
+        <mat-grid-tile>
+             <mat-radio-group aria-label="Select an option" class="roles" (change)="estadorol($event)" [value]="rolUsuario"> <!--formControlName="rol" (change)="selectRol($event)" -->
+             <div class="rol" *ngFor="let item of roles">
+               <img [src]="item.imagen" alt="rol"width="100" height="100" >
+               <mat-radio-button [value]="item.codrol" color="primary" >
+                 {{item.nombre}}
+               </mat-radio-button>
+              </div>
+           </mat-radio-group>
+         </mat-grid-tile>
+         <mat-grid-tile>
+           <button mat-raised-button color="primary" class="boton" (click)="cambiaRol()"><mat-icon>save</mat-icon> Guardar</button>
+         </mat-grid-tile>
+      </mat-grid-list>
+</div>
+
+
+<!-- <h5><a href='https://www.freepik.es/vectores/personas'>Vector de Personas creado por studiogstock - www.freepik.es</a></h5> -->

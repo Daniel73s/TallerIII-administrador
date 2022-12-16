@@ -1,0 +1,65 @@
+
+
+<div class="mr-top">
+    <mat-toolbar style="background-color: white;">
+      <mat-list *ngIf="vete">
+        <mat-list-item>
+          <img [src]="vete.imagen" alt="veterinaria" mat-list-avatar>
+          <div mat-line>VETERINARIA {{vete.nombre}}</div>
+        </mat-list-item>
+      </mat-list>
+      <!-- <mat-icon style="margin-left: 50px; margin-right: 5px;">people</mat-icon>
+      <span id="titulo" *ngIf="vete">VETERINARIA {{vete.nombre}}</span> -->
+      <span id="titulo" *ngIf="!vete">Cargando...</span>
+      <div class="example-spacer"></div>
+      <div class="inputbuscador">
+        <mat-form-field appearance="legacy" color="primary">
+          <mat-label>Buscar Usuario</mat-label>
+          <input matInput (keyup)="buscarPersona($event)" #input>
+        </mat-form-field>
+      </div>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="container">
+    <table mat-table [dataSource]="dataSource" class="tabla mat-elevation-z2">
+    
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+       
+      <!-- Weight Column -->
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef> Codigo</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.codper}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nombre" sticky>
+        <th mat-header-cell *matHeaderCellDef> Usuario </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-list>
+                <mat-list-item>
+                  <img [src]="element.foto" alt="usuarios" mat-list-avatar matTooltip="{{element.nombre}} {{element.ap}} {{element.am}}" matTooltipPosition="above">
+                  <div mat-line>{{element.nombre}}</div>
+                  <div mat-line>{{element.ap}} {{element.am}}</div>
+                </mat-list-item>
+          </mat-list>
+        </td>
+      </ng-container>
+      <!--Acciones-->
+      <ng-container matColumnDef="Acciones" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element"> 
+          <div style="display: flex; justify-content: flex-start;" #icono>
+            <button *ngIf="element.pv" mat-icon-button matTooltip="Eliminar Veterinario" matTooltipPosition="after" (click)="eliminar(element.codper)"><mat-icon color="warn">delete_forever</mat-icon></button>
+            <button *ngIf="!element.pv" mat-icon-button matTooltip="Asignar Veterinario" matTooltipPosition="after" (click)="asignar(element.codper)" ><mat-icon color="primary" class="animate__animated" >done</mat-icon></button>
+          </div>
+        
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+</div>
+

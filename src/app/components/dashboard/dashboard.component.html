@@ -1,0 +1,47 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar style="background-color: rgb(247, 247, 247); height: 197px;">
+      <div class="avatar-content">
+        <div class="avatar">
+          <img appImagen [src]="foto" alt="usuario foto">
+        </div>
+            <small>{{nombreCompleto}}</small>
+      </div>
+      <!-- <mat-divider></mat-divider> -->
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item class="item" *ngFor="let enlace of enlaces" [routerLink]="enlace.enlace"><mat-icon class="icon icon-margen" >{{enlace.icono}}</mat-icon>{{enlace.nombre}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content style="background-color: white;">
+    <mat-toolbar style="background-color: white;">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <!-- <span>admin</span> -->
+      <div class="example-spacer"></div>
+      <button mat-button [matMenuTriggerFor]="beforeMenu">
+        <mat-list>
+           <mat-list-item>
+            <img mat-list-avatar appImagen [src]="foto" alt="usuario" >
+           </mat-list-item>
+        </mat-list>
+      </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="miperfil()">Perfil</button>
+          <button mat-menu-item (click)="logout()">Cerrar Sesion</button>
+        </mat-menu>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

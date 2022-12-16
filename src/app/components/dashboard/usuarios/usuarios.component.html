@@ -1,0 +1,100 @@
+
+<div class="mr-top">
+    <mat-toolbar style="background-color: white;">
+      <mat-icon style="margin-left: 50px; margin-right: 5px;">account_circle</mat-icon>
+      <span id="titulo"> Gestionar Usuarios</span>
+      <div class="example-spacer"></div>
+      <div class="inputbuscador" #buscador>
+        <mat-form-field appearance="legacy" color="primary">
+          <mat-label>Buscar Usuario</mat-label>
+          <input matInput (keyup)="buscarPersona($event)" #input>
+        </mat-form-field>
+      </div>
+      <button mat-icon-button matTooltip="Buscar" (click)="cambiar()"
+      matTooltipPosition="below"> <mat-icon>search</mat-icon> </button>
+     <button  mat-icon-button matTooltip="Agregar Usuario"
+              routerLink="/dashboard/crearusu"
+              matTooltipPosition="below"
+              aria-label="Button that displays a tooltip in various positions">
+        <mat-icon>add</mat-icon>
+      </button> 
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="container">
+           <!-- Snniper -->
+           <!-- <mat-spinner *ngIf="bandera" style="margin: 25% auto;"></mat-spinner> -->
+
+        <!--Tabla-->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+       
+      <!-- Weight Column -->
+      <ng-container matColumnDef="nombre" sticky>
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-list>
+                <mat-list-item>
+                <!--[urlCustom]="'./assets/img/img-rota-usuario.png'"-->  
+                <img appImagen  [src]="element.foto" alt="usuarios" mat-list-avatar matTooltip="{{element.nombre}} {{element.ap}} {{element.am}}" matTooltipPosition="above">
+                  <div mat-line>{{element.nombre}}</div>
+                  <div mat-line>{{element.ap}} {{element.am}}</div>
+                </mat-list-item>
+          </mat-list>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="direccion">
+        <th mat-header-cell *matHeaderCellDef> Direccion</th>
+        <td mat-cell *matCellDef="let element">
+          {{element.direccion}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="celular">
+        <th mat-header-cell *matHeaderCellDef> Celular </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.celular}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef> Rol </th>
+        <td mat-cell *matCellDef="let element">
+          <!-- {{element.login}} -->
+          <div *ngFor="let rol of roles">
+            <div *ngIf="rol.codrol==element.codrol">
+              {{rol.nombre}}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.estado" style="color: rgb(43, 199, 247);">thumb_up</mat-icon>
+          <mat-icon *ngIf="!element.estado" style="color: rgb(43, 199, 247);">thumb_down</mat-icon>
+        </td>
+      </ng-container>
+      <!--Acciones-->
+      <ng-container matColumnDef="Acciones" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element"> 
+          <div style="display: flex; justify-content: flex-start;">
+            <!--  -->
+            <button mat-icon-button color="primary" [disabled]="login['login']==element.login" matTooltip="Roles" matTooltipPosition="above" (click)="CambiarRol(element.codrol,element.login)"><mat-icon>assignment_ind</mat-icon></button>
+            <button mat-icon-button matTooltip="Modificar clave" (click)="getCuenta(element.login)" matTooltipPosition="above" routerLink="/dashboard/modclave"><mat-icon style="color: rgb(23, 138, 245);">lock</mat-icon></button>
+            <button mat-icon-button color="primary" matTooltip="Modificar Usuario" matTooltipPosition="above" (click)="moduser(element.codper)"><mat-icon>mode_edit</mat-icon></button>
+            <!-- <button mat-icon-button color="warn" matTooltip="Eliminar" [disabled]="login['login']==element.login" matTooltipPosition="above"(click)="mensaje()" ><mat-icon>delete_forever</mat-icon></button> -->
+            <button mat-icon-button  matTooltip="Ver" matTooltipPosition="above" (click)="imprimir(element.codper)"><mat-icon style="color: rgb(23, 138, 245);">visibility</mat-icon></button>
+            <button mat-icon-button *ngIf="!element.estado" matTooltip="Habilitar Usuario" matTooltipPosition="above" (click)="estadoUsuario(element.login,true)"><mat-icon style="color: rgb(20, 207, 160);">check_circle</mat-icon></button>
+            <button mat-icon-button *ngIf="element.estado" matTooltip="Deshabilitar Usuario" matTooltipPosition="above" (click)="estadoUsuario(element.login,false)"><mat-icon style="color: rgb(226, 21, 21);">highlight_off</mat-icon></button>
+          </div>
+        
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+</div>
+

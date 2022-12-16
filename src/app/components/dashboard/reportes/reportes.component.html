@@ -1,0 +1,94 @@
+<mat-toolbar style="background-color: white;">
+    <mat-icon style="margin-left: 50px;">verified</mat-icon>
+    <span id="titulo">Reportes de usuarios y veterinarias</span>
+    <div class="example-spacer"></div>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<br><br>
+<mat-grid-list [cols]="colSize" rowHeight="80px">
+    <mat-grid-tile [colspan]="colSize" rowspan="1">
+        <h2>REPORTE DE USUARIOS</h2>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <div class="contenedor">
+            <h4>Estado</h4>
+            <mat-radio-group aria-label="Select an option" color="primary" [(ngModel)]="consulta.estado">
+                <mat-radio-button value="true">Activo</mat-radio-button>
+                <mat-radio-button value="false">Inactivo</mat-radio-button>
+                <mat-radio-button value="0">Sin estado</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <div class="contenedor">
+            <h4>Rol</h4>
+            <mat-radio-group aria-label="Select an option" color="primary" [(ngModel)]="consulta.rol">
+                <mat-radio-button value="1">Administrador</mat-radio-button>
+                <mat-radio-button value="2">Veterinario</mat-radio-button>
+                <mat-radio-button value="3">Cliente</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="fill">
+            <mat-label>Mes de Registro</mat-label>
+            <mat-select [(ngModel)]="consulta.mes">
+                <mat-option *ngFor="let mes of meses" [value]="mes.codigo">
+                    {{mes.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="colSize" rowspan="1">
+        <button mat-raised-button color="primary" (click)="generarReporteUsuarios()" style="color: #fff;"
+            [disabled]="!consulta.estado || !consulta.rol">
+            Generar Reporte de usuarios
+        </button>
+    </mat-grid-tile>
+</mat-grid-list>
+<br><br><br> 
+<!-- separacion -->
+<mat-grid-list [cols]="colSize" rowHeight="80px">
+    <mat-grid-tile [colspan]="colSize" rowspan="1">
+        <h2>REPORTE DE VETERINARIAS</h2>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <div class="contenedor">
+            <h4>Estado</h4>
+            <mat-radio-group aria-label="Select an option" color="primary" [(ngModel)]="consultaVet.estado">
+                <mat-radio-button value="true">Activo</mat-radio-button>
+                <mat-radio-button value="false">Inactivo</mat-radio-button>
+                <mat-radio-button value="0">Sin estado</mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="fill">
+            <mat-label>Mes de Registro</mat-label>
+            <mat-select [(ngModel)]="consultaVet.mes">
+                <mat-option *ngFor="let mes of meses" [value]="mes.codigo">
+                    {{mes.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select [(ngModel)]="consultaVet.codcategoria">
+                <mat-option value="0">
+                    sin categoria
+                </mat-option>
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.codcategoria">
+                    {{categoria.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="colSize" rowspan="1">
+        <button mat-raised-button color="primary" (click)="generarReporteVeterinarias()" style="color: #fff;"
+            [disabled]="!consultaVet.estado || !consultaVet.mes || !consultaVet.codcategoria">
+            Generar Reporte de veterinarias
+        </button>
+    </mat-grid-tile>
+</mat-grid-list>

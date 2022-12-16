@@ -1,0 +1,123 @@
+.container{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    padding: 30px;
+    /* border: 1px solid red; */
+}
+.row{
+    display: flex;
+}
+.col{
+    /* border: 1px solid red; */
+    flex-grow: 1;
+}
+
+.container-imagen{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    flex-direction: column;
+    align-items: center;
+}
+.container-imagen > img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid rgb(243, 242, 242);
+    padding: 4px;
+}
+
+.container-texto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.nombre{
+    font-weight: 500;
+    color: rgb(0, 0, 0);
+}
+.rol{
+    color: grey;
+}
+.action-buttons{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.btn-primary{
+    color: white;
+    margin-right:10px;
+}
+.title{
+    color: grey;
+    font-weight: 300;
+}
+.form-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-control > mat-form-field{
+    width: 90%;
+}
+
+/*Uploadimg*/
+.invoiceBox{margin-top: 10px;}
+.invoiceBox > input {
+    display: none;
+
+  }
+  .invoiceBox label {
+      display: flex;
+
+  }
+  .boxFile {
+      display: inline-block;
+    width: 100%;
+    border: 2px solid rgb(42, 187, 85);
+    background: #fff;
+    color: rgb(42, 187, 85);
+    padding: 5px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    /* border: 5px solid red; */
+    
+  }
+  .boxFile:hover {
+      cursor: pointer;
+      background: rgb(42, 187, 85);
+      color: #fff;
+  }
+  .boxFile i {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 5px;
+  }
+  .attached,
+  .attached:hover,
+  .attached:focus {
+    background: green;
+    color: #fff;
+    border: 1px solid green;
+  }
+
+
+@media only screen and (max-width: 700px) {
+  .container{
+    margin-left: 2%;
+    margin-right: 2%;  
+   } 
+  }
+  @media only screen and (max-width: 1300px) {
+     .row{
+         flex-direction: column;
+     }
+    }

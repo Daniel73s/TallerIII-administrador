@@ -1,0 +1,50 @@
+.contenedor{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  mat-form-field{
+    width: 95%;
+  }
+  .boton{
+    border-radius: 100px !important;
+    width: 120px;
+    height: 40px;
+    color: white;
+    margin-right: 12px;
+  
+  }
+  .botoncancelar{
+    border-radius: 100px !important;
+    width: 120px;
+    height: 40px;
+  }
+  .title{
+    display: flex;
+    justify-content: space-between;
+  }
+  .cursor{
+    cursor: pointer;
+  }
+
+  mat-selection-list {
+    max-height: 400px;
+    overflow: auto;
+  }
+  .avatar {
+    border-radius: 50%;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    width: 150px;
+}
+.rol-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

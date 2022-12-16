@@ -1,0 +1,62 @@
+<div class="mr-top">
+    <mat-toolbar style="background-color: white;">
+      <mat-icon style="margin-left: 50px; margin-right: 5px;">account_box</mat-icon>
+      <span id="titulo"> Gestionar Roles</span>
+      <div class="example-spacer"></div>
+      <div class="inputbuscador" *ngIf="estadoinput">
+        <mat-form-field appearance="legacy" color="primary">
+          <mat-label>Buscar Rol</mat-label>
+          <input matInput (keyup)="buscarRol($event)"> <!---->
+        </mat-form-field>
+      </div>
+      <!--  -->
+      <button mat-icon-button matTooltip="Buscar"
+      matTooltipPosition="below" (click)="cambiarestado()"> <mat-icon>search</mat-icon> </button>
+     <button  mat-icon-button matTooltip="Agregar Rol"
+              routerLink="/dashboard/addrol"
+              matTooltipPosition="below"
+              aria-label="Button that displays a tooltip in various positions">
+        <mat-icon>add</mat-icon>
+      </button> 
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="container">
+  <!-- Tabla -->
+    <table mat-table [dataSource]="dataSource" class="tabla mat-elevation-z2" >
+      <ng-container matColumnDef="Nombre" sticky>
+        <th mat-header-cell *matHeaderCellDef > Nombre </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-list>
+            <mat-list-item>
+              <img appImagen [src]="element.imagen" mat-list-avatar alt="rol imagen">
+              <div mat-line>{{element.nombre}}</div>
+            </mat-list-item>
+          </mat-list>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.estado">thumb_up</mat-icon>
+          <mat-icon *ngIf="!element.estado">thumb_down</mat-icon>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="acciones" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element"> 
+          <div style="display: flex; justify-content: flex-start;">
+            <button mat-icon-button color="primary" matTooltip="Asignar Procesos" (click)="asignarProc(element.codrol)"  matTooltipPosition="above"><mat-icon>label</mat-icon></button>
+            <button mat-icon-button color="warn" *ngIf="element.estado" (click)="CambiarEstado(false,element.codrol)" matTooltip="Deshabilitar" matTooltipPosition="above"><mat-icon>highlight_off</mat-icon></button>
+            <button mat-icon-button color="primary" *ngIf="!element.estado" (click)="CambiarEstado(true,element.codrol)" matTooltip="Habilitar" matTooltipPosition="above" ><mat-icon>update</mat-icon></button>
+            <button mat-icon-button matTooltip="Modificar Rol" matTooltipPosition="above" (click)="modrol(element.codrol)"><mat-icon style="color: rgb(23, 138, 245);">mode_edit</mat-icon></button>
+          </div>
+        
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> 
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+  </div>
+  

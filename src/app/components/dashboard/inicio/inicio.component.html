@@ -1,0 +1,42 @@
+<mat-toolbar style="background-color: white;">
+  <mat-icon style="margin-left: 50px;">home</mat-icon>
+  <span id="titulo">Inicio</span>
+  <div class="example-spacer"></div>
+</mat-toolbar>
+<mat-divider></mat-divider>
+
+<div class="contenedor" *ngIf="codrol==1">
+ <mat-card class="item-blue">
+  <mat-card-header>
+    <mat-icon class="icon" mat-card-avatar>groups</mat-icon>
+    <mat-card-title>Usuarios</mat-card-title>
+    <mat-card-subtitle>{{usuarios}} (Registrados)</mat-card-subtitle>
+  </mat-card-header>
+ </mat-card>
+
+ <mat-card class="item-green">
+   <mat-card-header>
+     <mat-icon class="icon" mat-card-avatar>pets</mat-icon>
+     <mat-card-title>Veterinarias</mat-card-title>
+     <mat-card-subtitle>{{veterinarias}} (Activas)</mat-card-subtitle>
+   </mat-card-header>
+</mat-card>
+<mat-card class="item-grey">
+  <mat-card-header>
+    <mat-icon class="icon"  mat-card-avatar>account_circle</mat-icon>
+     <mat-card-title>Administradores</mat-card-title>
+     <mat-card-subtitle>{{admins}} </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
+</div>
+<div class="contenedor" *ngIf="codrol!=1">
+  <mat-card class="item-danger">
+    <mat-card-header>
+      <mat-icon class="icon" mat-card-avatar>error</mat-icon>
+      <mat-card-title>Usuario no cuenta con permisos</mat-card-title>
+      <mat-card-subtitle>Acceso denegado </mat-card-subtitle>
+    </mat-card-header>
+ </mat-card>
+</div>
+  
+

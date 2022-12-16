@@ -1,0 +1,13 @@
+<div *ngIf="bandera">
+    <mat-toolbar style="background-color: white;">
+        <mat-icon style="margin-left: 50px; margin-right: 5px;">pets</mat-icon>
+        <span id="titulo"> VETERINARIA {{datosvet.nombre}}</span>
+        <div class="example-spacer"></div>
+        <!--  -->
+    </mat-toolbar>
+</div>
+<div class="spinner" *ngIf="!bandera">
+    <mat-spinner></mat-spinner>
+</div>
+<div id="mapa-mapbox">
+</div>

@@ -1,0 +1,16 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+mat-form-field{
+    margin-top: 15px;
+}
+
+mat-grid-tile{
+    border: 1px solid rgb(189, 189, 189);
+}

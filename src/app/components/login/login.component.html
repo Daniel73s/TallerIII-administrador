@@ -1,0 +1,34 @@
+<div class="contenedor">
+    <mat-spinner diameter="50" *ngIf="loading"></mat-spinner>
+    <div class="login mat-elevation-z9" style="padding: 20px;" *ngIf="!loading">
+        <form [formGroup]="form">
+            <img src="./assets/img/user.png"  width="50%" class="animate__animated animate__pulse" alt="usuario.png"> <!--class="animate__animated animate__backInDown"-->
+            <h1>Login</h1>
+            <mat-form-field  class="ancho" appearance="fill">
+                <mat-label>Usuario</mat-label>
+                <input type="text" matInput formControlName="usuario">
+                <mat-error *ngIf="valido('usuario')">
+                    {{getErrorMessage("usuario")}}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput formControlName="password"  [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon> {{hide ? 'visibility_off' : 'visibility'}} </mat-icon>
+                </button>
+                <mat-error *ngIf="valido('password')" style="margin-bottom: 10px;">
+                    {{getErrorMessage("password")}}
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <div style=" display: flex; justify-content: center;">
+                <ngx-recaptcha2 [siteKey]="siteKey" formControlName="recaptcha"></ngx-recaptcha2>
+            </div>
+              
+              <br>
+            <button (click)="ingresar()" [disabled]="form.invalid" mat-raised-button class="ancho boton" color="primary">INGRESAR</button>
+        </form>
+    </div>
+</div>

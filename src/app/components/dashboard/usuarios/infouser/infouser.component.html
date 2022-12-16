@@ -1,0 +1,91 @@
+<mat-toolbar style="background-color: white;">
+    <mat-icon style="margin-left: 50px;">account_box</mat-icon>
+    <span id="titulo">Perfil de Usuario</span>
+    <div class="example-spacer"></div>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<div *ngIf="!usuario" class="spinner">
+   <mat-spinner></mat-spinner>
+   <h3>Cargando...</h3>
+</div>
+
+    <div class="contenedor mat-elevation-z4" *ngIf="usuario">
+        <div class="title">
+            <mat-icon>person_outline</mat-icon> <h3> Informacion general</h3>
+          </div>
+          <mat-grid-list cols="3" rowHeight="100px">
+            <mat-grid-tile colspan="1" rowspan="1">
+              <mat-form-field appearance="legacy">
+                <mat-label>Codigo</mat-label>
+                <input matInput [value]="usuario.codper" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+              <mat-form-field appearance="legacy">
+                <mat-label>Nombre Completo</mat-label>
+                <input matInput value=" {{usuario.ap}} {{usuario.am}} {{usuario.nombre}}" readonly>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="3">
+               <img [src]="usuario.foto" class="foto" alt="administrador">
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Direccion</mat-label>
+                  <input matInput [value]="usuario.direccion" readonly>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Telefono</mat-label>
+                  <input matInput [value]="usuario.celular" readonly>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Fecha de Nacimiento</mat-label>
+                  <input matInput [value]="usuario.fechanac | date" readonly>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile colspan="1" rowspan="1">
+                <mat-form-field appearance="legacy">
+                  <mat-label>Te uniste el:</mat-label>
+                  <input matInput [value]="usuario.fechacre | date" readonly>
+                </mat-form-field>
+              </mat-grid-tile>
+          </mat-grid-list>
+          <div class="title">
+              <mat-icon>lock</mat-icon> <h3> Cuenta y rol</h3>
+            </div>
+            <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>cuenta</mat-label>
+                    <input matInput [value]="usuario.login" readonly>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <mat-form-field appearance="legacy">
+                    <mat-label>rol</mat-label>
+                    <input matInput [value]="usuario.rol" readonly>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <div *ngIf="usuario.codrol==2">
+                <div class="title">
+                    <mat-icon>pets</mat-icon> <h3> Veterinarias</h3>
+                </div>    
+                <span class="error" *ngIf="veterinaria.length===0">No esta asignado(a) a ninguna veterinaria</span>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let vet of veterinaria">
+                      <img [src]="vet.imagen" style="margin-right: 10px;" mat-card-avatar alt="logo veterinaria" width="30" height="30">
+                      {{vet.nombre}}
+                    </mat-list-item>
+                  </mat-list>
+              </div>
+
+            <!-- <div class="imprimir">
+                <button mat-raised-button color="primary" class="boton"><mat-icon>print</mat-icon> Imprimir</button> 
+            </div> -->
+    </div>
+

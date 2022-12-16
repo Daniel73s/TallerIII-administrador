@@ -1,0 +1,12 @@
+#mapa-mapbox{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(231, 231, 231);
+    position: relative;
+}
+.boton{
+    position: fixed;
+    right: 250px;
+    top:100px;
+    color: white;
+}

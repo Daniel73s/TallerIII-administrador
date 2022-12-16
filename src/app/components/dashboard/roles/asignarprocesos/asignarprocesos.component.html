@@ -1,0 +1,37 @@
+
+<mat-toolbar style="background-color: white;">
+    <span style="margin-left: 50px;">Asignar Procesos a un Rol</span>
+    <div class="example-spacer"></div>
+</mat-toolbar>
+<mat-divider></mat-divider>
+
+<div class="contenedor mat-elevation-z4">
+    <div class="title">
+        <div style="display: flex;">
+            <mat-icon>label</mat-icon> <h3>Asignando procesos</h3>
+        </div>
+    </div>
+    <div style="width: 70%;">
+        <mat-grid-list cols="2" >
+            <mat-grid-tile colspan="1" style="background-color: rgb(238, 238, 238);">  
+                    <mat-spinner *ngIf="!rol"></mat-spinner>
+                    <div *ngIf="rol" class="rol-container">
+                        <img [src]="rol.imagen" alt="" class="avatar"> 
+                         <h3>{{rol.nombre}}</h3>
+                    </div>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1">
+                <mat-selection-list color="primary" (selectionChange)="addprocesorol($event)" >
+                        <mat-list-option *ngFor=" let proceso of procesos" [selected]="proceso.select" [value]="proceso.codproc"> <!--(click)="addprocesorol(proceso.codproc)"-->
+                            {{proceso.nombre}}
+                        </mat-list-option>
+                </mat-selection-list>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>
+
+
+
+
+

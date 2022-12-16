@@ -1,0 +1,83 @@
+<div class="mr-top">
+  <mat-toolbar style="background-color: white;">
+    <mat-icon style="margin-left: 50px; margin-right: 5px;">pets</mat-icon>
+    <span id="titulo"> Gestionar Veterinarias</span>
+    <div class="example-spacer"></div>
+    <div class="inputbuscador" #buscador>
+      <mat-form-field appearance="legacy" color="primary">
+        <mat-label>Buscar Veterinaria</mat-label>
+        <input matInput (keyup)="buscarPersona($event)" #input>
+      </mat-form-field>
+    </div>
+    <!--  -->
+    <button mat-icon-button matTooltip="Buscar" (click)="cambiar()"
+    matTooltipPosition="below"> <mat-icon>search</mat-icon> </button>
+   <button  mat-icon-button matTooltip="Agregar Veterinaria"
+            routerLink="/dashboard/crearvet"
+            matTooltipPosition="below"
+            aria-label="Button that displays a tooltip in various positions">
+      <mat-icon>add</mat-icon>
+    </button> 
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+  <div class="container">
+<!-- Tabla -->
+  <table mat-table [dataSource]="dataSource" class="tabla mat-elevation-z2">
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> Codigo </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.codvet}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Nombre" sticky>
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-list>
+              <mat-list-item>
+                <img appImagen [src]="element.imagen" mat-list-avatar alt="imagen">
+                <div mat-line>{{element.nombre}}</div>
+                <div mat-line>
+                  <small class="mensajeok" *ngIf="element.ac">Abierto</small>
+                  <small class="mensajerror" *ngIf="!element.ac">Cerrado</small>
+                </div>
+              </mat-list-item>
+        </mat-list>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Estado">
+      <th mat-header-cell *matHeaderCellDef> Estado</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon *ngIf="element.estado" color="primary">thumb_up</mat-icon>
+        <mat-icon *ngIf="!element.estado" color="warn">thumb_down</mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Telefono">
+      <th mat-header-cell *matHeaderCellDef>Telefono </th>
+      <td mat-cell *matCellDef="let element">
+        {{element.telefono}}
+      </td>
+    </ng-container>
+    <!--Acciones-->
+    <ng-container matColumnDef="Acciones" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef>  </th>
+      <td mat-cell *matCellDef="let element"> 
+        <div style="display: flex; justify-content: flex-start;">
+          <!--  -->
+          <button mat-icon-button matTooltip="Ubicacion" (click)="ubicacion(element.codvet)" matTooltipPosition="above" ><mat-icon style="color: rgb(23, 138, 245);">location_on</mat-icon></button>
+          <button mat-icon-button matTooltip="Modificar veterinaria" (click)="modvet(element.codvet)" matTooltipPosition="above" ><mat-icon style="color: rgb(23, 138, 245);">mode_edit</mat-icon></button>
+          <button mat-icon-button color="primary" matTooltip="Asignar Veterinario" [disabled]="!element.estado" matTooltipPosition="above" (click)="addVeterinariovet(element.codvet)"><mat-icon>account_circle</mat-icon></button> 
+          <button mat-icon-button color="warn" *ngIf="element.estado" matTooltip="Deshabilitar" matTooltipPosition="above"(click)="eliminar(element.codvet)" ><mat-icon>highlight_off</mat-icon></button>
+          <button mat-icon-button color="primary" *ngIf="!element.estado" matTooltip="Habilitar" matTooltipPosition="above" (click)="habilitar(element.codvet)"><mat-icon>update</mat-icon></button>
+          <button mat-icon-button matTooltip="ver" (click)="imprimirvet(element.codvet)" matTooltipPosition="above" ><mat-icon style="color: rgb(23, 138, 245);">visibility</mat-icon></button>
+        </div>
+      
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+</div>
+
+

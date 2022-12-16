@@ -1,0 +1,88 @@
+<mat-toolbar style="background-color: white;">
+    <span style="margin-left: 50px;" id="titulo">Modificar Usuario</span>
+    <div class="example-spacer"></div>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+  <div class="contenedor mat-elevation-z4">
+    <div class="title">
+      <mat-icon>person_outline</mat-icon> <h3> Informacion general</h3>
+    </div>
+    <div *ngIf="!persona" class="spinner">
+      <mat-spinner></mat-spinner>
+      <br>
+      <p>Cargando informacion...</p>
+    </div>
+    <form [formGroup]="formulario" *ngIf="persona">
+      <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" required>
+            <mat-error>{{ getError('nombre')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido Paterno</mat-label>
+            <input matInput formControlName="ap">
+            <mat-error>{{ getError('ap')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Apellido Materno</mat-label>
+            <input matInput formControlName="am">
+            <mat-error>{{ getError('am')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="3">
+          <div class="uploadimg">
+            <div class="avatar">
+              <img [src]="urlImage | async" alt="usuario" *ngIf="urlImage | async">
+              <img [src]="foto" alt="usuario">
+
+            </div>
+            <div class="invoiceBox">
+              <label for="file">
+                <div class="boxFile" data-text="Seleccionar archivo">
+                  Seleccionar Foto
+                </div>
+              </label>
+              <input id="file" type="file" name="invoice[]" size="3000" accept=".png, .jpg" (change)="uploadFile($event)" >
+            </div>
+            <br>
+              <mat-progress-bar mode="determinate" [value]="uploadPercent | async"></mat-progress-bar> 
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Telefono</mat-label>
+            <input matInput formControlName="celular" required>
+            <mat-error>{{ getError('celular')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Direccion</mat-label>
+            <input matInput formControlName="direccion" #direccion required>
+            <mat-hint align="end">{{direccion.value?.length || 0}}/150</mat-hint>
+            <mat-error>{{ getError('direccion')}}</mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="fechanac" required>
+            <mat-error>{{ getError('fechanac')}}</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="3" rowspan="1">
+          <button mat-raised-button color="primary" [disabled]="formulario.invalid" class="boton" (click)="modificar()"><mat-icon>save</mat-icon> Guardar</button> 
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+    <input type="hidden" #ImageUser [value]="urlImage | async">
+  </div>

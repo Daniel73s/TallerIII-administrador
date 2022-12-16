@@ -1,0 +1,138 @@
+<mat-toolbar style="background-color: white;">
+  <span style="margin-left: 50px;" id="titulo">Agregar Nuevo Usuario</span>
+  <div class="example-spacer"></div>
+</mat-toolbar>
+<mat-divider></mat-divider>
+<div class="contenedor mat-elevation-z4">
+  <div class="title">
+    <mat-icon>person_outline</mat-icon> <h3> Informacion general</h3>
+  </div>
+  <form [formGroup]="formulario">
+    <mat-grid-list cols="4" rowHeight="100px" >
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre" maxlength="15" required>
+          <!-- <mat-hint align="end">{{name.value?.length || 0}}/15</mat-hint> -->
+          <mat-error>{{ getError('nombre')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput formControlName="ap"  maxlength="15">
+          <!-- <mat-hint align="end">{{apaterno.value?.length || 0}}/15</mat-hint> -->
+          <mat-error>{{ getError('ap')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput formControlName="am"  maxlength="15">
+          <mat-error>{{ getError('am')}}</mat-error>
+          <!-- <mat-hint align="end">{{input.value?.length || 0}}/15</mat-hint> -->
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="2" >
+        <div class="uploadimg">
+          
+          <div class="avatar">
+            <img [src]="urlImage | async" alt="usuario" *ngIf="urlImage | async">
+            <img src="./assets/img/user.png" alt="usuario">
+          </div>
+          <div class="invoiceBox">
+            <label for="file">
+              <div class="boxFile" data-text="Seleccionar archivo">
+                Seleccionar Foto
+              </div>
+            </label>
+            <input id="file" type="file" name="invoice[]" size="3000" accept=".png, .jpg" (change)="uploadFile($event)" >
+          </div>
+          <br>
+          <mat-progress-bar mode="determinate" [value]="uploadPercent | async"></mat-progress-bar> 
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1" >
+        <mat-form-field appearance="outline">
+          <mat-label>Celular/Telefono</mat-label>
+          <input matInput formControlName="celular" type="number" #celular required>
+          <mat-hint align="end">{{celular.value?.length || 0}}/8</mat-hint>
+          <mat-error>{{ getError('celular')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="direccion" #dire maxlength="50" required>
+          <mat-hint align="end">{{dire.value?.length || 0}}/50</mat-hint>
+          <mat-error>{{ getError('direccion')}}</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="fechanac" required>
+          <mat-error>{{ getError('fechanac')}}</mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <!-- <mat-grid-tile colspan="3" rowspan="1">
+        <button mat-raised-button type="submit" color="primary" [disabled]="formulario.invalid" class="boton"><mat-icon>save</mat-icon> Guardar</button> 
+      </mat-grid-tile> -->
+    </mat-grid-list>
+    <div class="title">
+      <mat-icon>lock</mat-icon> <h3> Cuenta </h3>
+    </div>
+    <mat-grid-list cols="3" rowHeight="100px">
+      <mat-grid-tile colspan="1" rowspan="1">
+      
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput value="El usuario se genera automaticamente" readonly class="danger">
+        </mat-form-field>
+       
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+        <mat-label>Nueva Clave</mat-label>
+        <input matInput  [type]="hide ? 'password' : 'text'" formControlName="clave" required>
+        <mat-error>{{ getError('clave')}}</mat-error>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-form-field appearance="outline">
+        <mat-label>Confirmar Clave</mat-label>
+            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="repclave" required>
+            <mat-error >{{ getError('repclave')}}</mat-error>
+            <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field> 
+      </mat-grid-tile>
+    </mat-grid-list>
+    
+     <div class="title" style="margin-bottom: 20px;">
+      <mat-icon>account_circle</mat-icon> <h3> Asignar Rol </h3>
+    </div>
+    <mat-grid-list cols="1" rowHeight="130px" >
+      <mat-grid-tile>
+       <mat-radio-group aria-label="Select an option" class="roles" formControlName="rol" (change)="selectRol($event)">
+        <div class="rol" *ngFor="let item of roles">
+          <img [src]="item.imagen" alt="rol"width="100" height="100" >
+          <mat-radio-button [value]="item.codrol" color="primary" >
+            {{item.nombre}}
+          </mat-radio-button>
+         </div>
+      </mat-radio-group>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button mat-raised-button (click)="submit()" color="primary" [disabled]="formulario.invalid" class="boton"><mat-icon>save</mat-icon> Guardar</button> 
+    </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+  <input type="hidden" #ImageUser [value]="urlImage | async">
+</div>

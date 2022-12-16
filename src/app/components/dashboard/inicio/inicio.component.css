@@ -1,0 +1,37 @@
+.contenedor{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 10px;
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.item-blue{
+    width: 30%;
+    background-color:rgb(10, 125, 219) ;
+    color: white;
+}
+.item-green{
+    width: 30%;
+    background-color:rgb(8, 194, 54);;
+    color: white;
+}
+.item-grey{
+    width: 30%;
+    background-color:rgb(177, 177, 177) ;
+    color: white;
+}
+mat-card-subtitle{
+    color: white;
+}
+.icon{
+  font-size: 40px;
+  color: white;
+}
+
+.item-danger{
+    width: 90%;
+    background-color:rgb(216, 32, 32);
+    color: white;
+}

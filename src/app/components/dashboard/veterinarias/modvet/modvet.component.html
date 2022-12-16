@@ -1,0 +1,98 @@
+<mat-toolbar style="background-color: white;">
+    <span style="margin-left: 50px;" id="titulo">Modificar Veterinaria</span>
+    <div class="example-spacer"></div>
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+  <div class="contenedor mat-elevation-z4">
+    <div class="title">
+      <mat-icon>pets</mat-icon> <h3> Informacion general</h3>
+    </div>
+
+    <div class="loading" *ngIf="!veterinaria">
+        <div class="spinner">
+            <mat-spinner></mat-spinner>
+        </div>
+    </div>
+ <form [formGroup]="formulario" *ngIf="veterinaria">
+     <mat-grid-list cols="4" rowHeight="100px" >
+       <mat-grid-tile colspan="1" rowspan="1">
+         <mat-form-field appearance="outline">
+           <mat-label>Nombre</mat-label>
+           <input matInput formControlName="nombre" #nombre required>
+           <mat-hint align="end">{{nombre.value?.length || 0}}/30</mat-hint>
+            <mat-error>{{ getError('nombre')}}</mat-error>
+         </mat-form-field>
+       </mat-grid-tile>
+       <mat-grid-tile colspan="1" rowspan="1">
+         <mat-form-field appearance="outline">
+           <mat-label>Direccion</mat-label>
+           <input matInput formControlName="direccion" #direccion required>
+           <mat-hint align="end">{{direccion.value?.length || 0}}/150</mat-hint>
+            <mat-error>{{ getError('direccion')}}</mat-error>
+         </mat-form-field>
+       </mat-grid-tile>
+   
+       <mat-grid-tile colspan="1" rowspan="1">
+         <mat-form-field appearance="outline">
+           <mat-label>Telefono</mat-label>
+           <input matInput formControlName="telefono" #telefono required>
+           <mat-hint align="end">{{telefono.value?.length || 0}}/8</mat-hint>
+            <mat-error>{{ getError('telefono')}}</mat-error>
+         </mat-form-field>
+       </mat-grid-tile>
+       <mat-grid-tile colspan="1" rowspan="2" >
+         <div class="uploadimg">
+           <div class="avatar">
+             <img [src]="urlImage | async" alt="usuario" *ngIf="urlImage | async">
+             <img [src]="foto" alt="veterinaria">
+           </div>
+           <div class="invoiceBox">
+             <label for="file">
+               <div class="boxFile" data-text="Seleccionar archivo">
+                 Seleccionar Foto
+               </div>
+             </label>
+             <input id="file" type="file" name="invoice[]" size="3000" accept=".png, .jpg" (change)="uploadFile($event)"> <!-- -->
+           </div>
+           <br>
+           <mat-progress-bar mode="determinate" [value]="uploadPercent | async"></mat-progress-bar> 
+         </div>
+         
+       </mat-grid-tile>
+       <mat-grid-tile colspan="2" rowspan="1">
+          <!-- <span class="danger" *ngIf="!ubicacion.lat">No se eligio no se eligio ninguna ubicacion</span> -->
+        <span class="ok">Ubicacion Actual: {{ubicacion.lat}} |  {{ubicacion.lng}}</span>
+       </mat-grid-tile>
+       <mat-grid-tile colspan="1" rowspan="1">
+         <button mat-stroked-button color="primary" (click)="openDialog()"><mat-icon>add_location_alt</mat-icon> Seleccionar Nueva Ubicacion</button>
+       </mat-grid-tile>
+       
+       <mat-grid-tile colspan="3" rowspan="1" >
+        <mat-form-field appearance="outline" >
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoria" #categoria required>
+              <mat-option *ngFor="let categoria of categorias" [value]="categoria.codcategoria">
+                {{categoria.nombre}} 
+              </mat-option> 
+            </mat-select>
+        </mat-form-field>
+
+      </mat-grid-tile>
+       <mat-grid-tile colspan="3" rowspan="1">
+         <mat-form-field appearance="outline">
+           <mat-label>Descripcion</mat-label>
+           <input matInput formControlName="descripcion" #descripcion required>
+           <mat-hint align="end">{{descripcion.value?.length || 0}}/250</mat-hint>
+            <mat-error>{{ getError('descripcion')}}</mat-error>
+         </mat-form-field> 
+       </mat-grid-tile>
+       <mat-grid-tile colspan="4" rowspan="1">
+         <!-- <button mat-raised-button color="primary"(click)="submit()"  class="boton" *ngIf="ubicacion.lat" [disabled]="formvet.invalid"><mat-icon>save</mat-icon> Guardar</button>  -->
+         <button mat-raised-button color="primary" class="boton" (click)="update()" [disabled]="formulario.invalid" ><mat-icon>update</mat-icon> Actualizar</button> 
+       </mat-grid-tile>
+     </mat-grid-list>
+ </form>
+
+    <input type="hidden" #Imagevet [value]="urlImage | async">
+  </div>
+  

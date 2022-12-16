@@ -1,0 +1,107 @@
+<mat-toolbar style="background-color: white;">
+    <mat-icon style="margin-left: 50px; margin-right: 5px;">account_box</mat-icon>
+    <span id="titulo"> Mi Perfil</span>
+    <div class="example-spacer"></div> 
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+<div class="container mat-elevation-z2">
+    <div class="row" *ngIf="persona">
+        <div class="col">
+           <div class="container-imagen">
+               <img [src]="persona.foto" alt="usuario">
+               <!-- <button mat-icon-button *ngIf="formu" color="primary" style="border: 1px solid green; top: 125px; right:200px; position: absolute;"><mat-icon>home</mat-icon></button> -->
+               <div class="container-texto">
+                <div class="nombre">{{persona.ap}} {{persona.am}} {{persona.nombre}}</div>
+                <div class="rol">{{persona.rol}}</div>
+               </div>
+           </div>
+           <div class="action-buttons">
+                   <button *ngIf="formu"  mat-raised-button color="primary" (click)="actualizar()" [disabled]="formularioUpdate.invalid" class="btn-primary">Guardar Cambios</button>
+                   <!-- <button *ngIf="!formu" mat-raised-button color="primary" class="btn-primary" (click)="removerdata()">Editar perfil</button> -->
+                   <button mat-stroked-button (click)="cancelar()" *ngIf="formu">Cancelar</button>
+           </div>
+        </div>
+        <div class="col">
+             <div class="form-control" *ngIf="!formu">
+                 <mat-form-field appearance="outline">
+                    <mat-label>Codigo</mat-label>
+                    <input matInput value="1110" readonly [value]="persona.codper">
+                  </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput [value]="persona.nombre" readonly  >
+                      </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput [value]="persona.ap" readonly>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput [value]="persona.am" readonly >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Direccion</mat-label>
+                    <input matInput [value]="persona.direccion" readonly >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Telefono/Celular</mat-label>
+                    <input matInput [value]="persona.celular" readonly >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [value]="persona.fechanac | date" readonly >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput [value]="persona.login" readonly >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Rol</mat-label>
+                    <input matInput [value]="persona.rol" readonly >
+                  </mat-form-field>
+             </div>
+
+  
+                 <form [formGroup]="formularioUpdate" class="form-control" *ngIf="formu">
+                     <mat-form-field appearance="outline">
+                         <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombre"  >
+                          </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Apellido Paterno</mat-label>
+                        <input matInput formControlName="ap">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Apellido Materno</mat-label>
+                        <input matInput formControlName="am">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Direccion</mat-label>
+                        <input matInput formControlName="direccion">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Telefono/Celular</mat-label>
+                        <input matInput formControlName="celular">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                        <mat-label>Fecha de Nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="fechanac">
+                        <!-- <mat-error>{{ getError('fechanac')}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      <div class="invoiceBox">
+                        <label for="file">
+                          <div class="boxFile" data-text="Seleccionar archivo">
+                            Cambiar Foto de Perfil
+                          </div>
+                        </label>
+                        <input id="file" type="file" name="invoice[]" size="3000" accept=".png, .jpg" (change)="uploadFile($event)" >
+                      </div><br>
+                      <mat-progress-bar mode="determinate" [value]="uploadPercent | async"></mat-progress-bar> 
+                 </form>
+
+         </div>
+    </div>
+    <input type="hidden" #ImageUser [value]="urlImage | async">
+</div>
